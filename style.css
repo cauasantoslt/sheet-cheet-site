@@ -1,0 +1,261 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap'); /* Adicionado Fira Code */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --title-color:#9a00d6 ; /* Roxo */
+    --primary-color: #0ff; /* Azul ciano */
+    --secondary-color: #0f0f1a; /* Cor de fundo escura */
+    --terciary-color: #00ffb3;
+    --forty-color:rgb(255, 50, 163);
+    --text-color: #e0e0e0; /* Cor do texto */
+    --highlight-color: #00FFFF; /* Azul ciano brilhante */
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    background: linear-gradient(135deg, #050508, #07070f);
+    color: #e0e0e0;
+    position: relative; /* Necessário para os pontos e o botão "topo" */
+    overflow-x: hidden; /* Evita scroll horizontal */
+}
+
+/* Pontos brilhantes no fundo */
+.glowing-dots {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.dot {
+    position: absolute;
+    background: var(--terciary-color);
+    border-radius: 50%;
+    animation: floatAndFade 5s infinite ease-in-out;
+    opacity: 0;
+}
+
+.dot:nth-child(1) { width: 5px; height: 5px; top: 10%; left: 20%; animation-delay: 0s; }
+.dot:nth-child(2) { width: 8px; height: 8px; top: 30%; left: 80%; animation-delay: 2s; }
+.dot:nth-child(3) { width: 6px; height: 6px; top: 50%; left: 40%; animation-delay: 4s; }
+.dot:nth-child(4) { width: 7px; height: 7px; top: 70%; left: 10%; animation-delay: 6s; }
+.dot:nth-child(5) { width: 9px; height: 9px; top: 90%; left: 60%; animation-delay: 8s; }
+.dot:nth-child(6) { width: 5px; height: 5px; top: 20%; left: 55%; animation-delay: 10s; }
+.dot:nth-child(7) { width: 8px; height: 8px; top: 60%; left: 25%; animation-delay: 12s; }
+.dot:nth-child(8) { width: 6px; height: 6px; top: 80%; left: 90%; animation-delay: 14s; }
+
+@keyframes floatAndFade {
+    0% { transform: translateY(0) translateX(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-100px) translateX(50px); opacity: 0; }
+}
+
+header {
+    background: var(--primary-color);
+    color: var(--title-color);
+    padding: 1.5em;
+    text-align: center;
+    box-shadow: 0 0 15px #0ff;
+    position: relative;
+    overflow: hidden;
+}
+
+header h1 {
+    font-size: 2.2em;
+    margin-bottom: 0.2em;
+}
+
+header p {
+    font-size: 1.1em;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2em auto;
+    padding: 2em;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+section {
+    margin-bottom: 2.5em;
+    opacity: 0; /* Começa invisível para a animação */
+    transform: translateY(20px); /* Começa um pouco abaixo */
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+section.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h2 {
+    color: var(--terciary-color);
+    font-size: 1.6em;
+    margin-bottom: 0.5em;
+    border-left: 4px solid var(--primary-color);
+    padding-left: 10px;
+    position: relative;
+}
+
+h2::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background: var(--primary-color);
+    transition: width 0.3s ease-out;
+}
+
+h2:hover::before {
+    width: 100%;
+}
+
+p {
+    margin-bottom: 1em;
+    line-height: 1.6;
+}
+
+code {
+    background: rgba(0, 255, 255, 0.1);
+    padding: 0.7em 1em; /* Ajustado para melhor visualização */
+    border-left: 3px solid var(--terciary-color);
+    display: block;
+    margin-bottom: 1em; /* Ajustado espaçamento */
+    border-radius: 4px;
+    font-family: 'Fira Code', monospace; /* Fonte mais adequada para código */
+    color: var(--forty-color);
+    white-space: pre-wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilo para a nova caixa de explicação */
+.explanation-box {
+    background: rgba(0, 150, 150, 0.15); /* Um azul/ciano mais escuro e sutil */
+    border: 1px solid #00FFFF; /* Borda ciano brilhante */
+    border-radius: 8px;
+    padding: 1.2em 1.5em;
+    margin-top: 1.5em; /* Espaço maior acima da caixa */
+    margin-bottom: 2em; /* Espaço abaixo para o próximo item */
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.3); /* Sombra mais destacada */
+    line-height: 1.7;
+    font-size: 0.95em;
+    color: #e0dbdb; /* Cor do texto ligeiramente mais clara */
+    transition: all 0.3s ease-in-out;
+}
+
+.explanation-box:hover {
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.5); /* Sombra mais intensa no hover */
+    transform: translateY(-3px); /* Leve levantamento */
+}
+
+a {
+    color: #0ff; /* Cor padrão para links, como em main */
+    text-decoration: none;
+    transition: text-shadow 0.3s ease-in-out;
+}
+
+a:hover {
+    text-shadow: 0 0 15px #0ff, 0 0 25px #0ff;
+}
+
+footer {
+    background: #0ff;
+    color: var(--secondary-color); /* Cor do texto padrão do footer */
+    text-align: center;
+    padding: 1em;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 0 15px #0ff;
+    margin-top: 3em;
+}
+
+/* CORREÇÃO AQUI: Estilizando os links dentro do footer */
+footer a {
+    color: #0129ad; /* Cor azul ciano brilhante para os links do footer */
+    text-decoration: none; /* Manter sem sublinhado */
+    transition: color 0.3s ease-in-out, text-shadow 0.3s ease-in-out;
+}
+
+footer a:hover {
+    color: #4c56e7c9; /* Cor branca ao passar o mouse para um contraste ainda maior */
+    text-shadow: 0 0 10px #00FFFF, 0 0 20px #00FFFF; /* Sombra de texto com a cor ciano */
+}
+
+/* Botão Voltar ao Topo */
+#backToTopBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed position */
+    bottom: 30px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: var(--terciary-color); /* Set a background color */
+    color: #0f0f1a; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px 20px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+    box-shadow: 0 0 15px #0ff;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+#backToTopBtn:hover {
+    background-color: #00cccc; /* Darker background on hover */
+    transform: scale(1.05);
+}
+
+/* Animação para os títulos do header */
+.typing-effect {
+    overflow: hidden; /* Garante que o texto não "vaze" */
+    white-space: nowrap; /* Impede que o texto quebre linha */
+    border-right: .15em solid #0f0f1a; /* Cursor piscando */
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+    display: inline-block; /* Para o cursor funcionar corretamente */
+}
+
+@media (max-width: 768px) {
+     header h1  {
+        font-size: 1.1rem;
+    }}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #0f0f1a; }
+}
+
+.typing-effect-subheader {
+    overflow: hidden;
+    white-space: nowrap;
+    display: inline-block;
+    animation: typing-sub 2s steps(40, end) forwards;
+    width: 0; /* Começa com largura zero */
+    animation-delay: 3.5s; /* Começa após o h1 */
+    animation-fill-mode: forwards; /* Mantém o estado final */
+}
+
+@keyframes typing-sub {
+    from { width: 0; }
+    to { width: 100%; }
+}

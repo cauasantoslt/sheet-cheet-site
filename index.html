@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Cheat Sheet ML - Estilo Futurista</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="glowing-dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <header>
+        <h1 class="typing-effect">Cheat Sheet - Validação e Métricas em ML</h1>
+        <p class="typing-effect-subheader">Com Scikit-learn + Imbalanced-learn</p>
+    </header>
+
+    <main>
+        <section>
+            <h2>1. Divisão dos Dados</h2>
+            <p>Separação estratificada em treino, teste e validação:</p>
+            <code data-text="from sklearn.model_selection import train_test_split">from sklearn.model_selection import train_test_split</code>
+            <code data-text="x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, stratify=y)">x_treino, x_teste, y_treino, y_teste = train_test_split(x, y, stratify=y)</code>
+            <p class="explanation-box">
+                A divisão dos dados é um passo crucial para garantir que seu modelo de Machine Learning seja avaliado de forma justa. `train_test_split` do Scikit-learn divide seu conjunto de dados em subconjuntos para treinamento e teste. O parâmetro `stratify=y` é especialmente importante em problemas de classificação com classes desbalanceadas, pois garante que a proporção das classes seja mantida em cada um dos subconjuntos, evitando que um conjunto de teste tenha pouquíssimos exemplos de uma classe minoritária, por exemplo. Isso permite uma avaliação mais robusta do desempenho do modelo.
+            </p>
+        </section>
+
+        <section>
+            <h2>2. Criação de Modelos</h2>
+            <code data-text="from sklearn.tree import DecisionTreeClassifier">from sklearn.tree import DecisionTreeClassifier</code>
+            <code data-text="modelo = DecisionTreeClassifier(max_depth=10)">modelo = DecisionTreeClassifier(max_depth=10)</code>
+            <code data-text="from sklearn.ensemble import RandomForestClassifier">from sklearn.ensemble import RandomForestClassifier</code>
+            <code data-text="modelo = RandomForestClassifier(max_depth=10)">modelo = RandomForestClassifier(max_depth=10)</code>
+            <p class="explanation-box">
+                Aqui você define o tipo de modelo de Machine Learning que deseja utilizar. `DecisionTreeClassifier` é um modelo fundamental que toma decisões baseadas em regras de árvore. `RandomForestClassifier` é um modelo de ensemble que combina várias árvores de decisão para melhorar a precisão e reduzir o overfitting. O parâmetro `max_depth` limita a profundidade da árvore, ajudando a controlar a complexidade do modelo e evitar que ele se ajuste demais aos dados de treinamento.
+            </p>
+        </section>
+
+        <section>
+            <h2>3. Ajuste e Previsão</h2>
+            <code data-text="modelo.fit(x_treino, y_treino)">modelo.fit(x_treino, y_treino)</code>
+            <code data-text="y_previsto = modelo.predict(x_val)">y_previsto = modelo.predict(x_val)</code>
+            <p class="explanation-box">
+                O método `fit()` é onde o modelo "aprende" os padrões dos dados de treinamento. Ele ajusta seus parâmetros internos com base nas características (`x_treino`) e nos rótulos (`y_treino`) fornecidos. Após o treinamento, você pode usar o método `predict()` para gerar previsões (`y_previsto`) para novos dados de entrada (`x_val`). É crucial que os dados usados para previsão (`x_val`) sejam diferentes dos dados de treinamento para avaliar a capacidade de generalização do modelo.
+            </p>
+        </section>
+
+        <section>
+            <h2>4. Avaliação</h2>
+            <code data-text="modelo.score(x_val, y_val)">modelo.score(x_val, y_val)</code>
+            <p class="explanation-box">
+                O método `modelo.score()` oferece uma maneira rápida de obter a acurácia do seu modelo em um conjunto de dados de teste ou validação. Para problemas de classificação, ele retorna a proporção de previsões corretas. É uma métrica de alto nível que indica a performance geral, mas deve ser complementada com outras métricas (como precisão, recall, F1-score) para uma compreensão mais aprofundada, especialmente em casos de desbalanceamento de classes.
+            </p>
+        </section>
+
+        <section>
+            <h2>5. Matriz de Confusão</h2>
+            <code data-text="from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay">from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay</code>
+            <code data-text="ConfusionMatrixDisplay.from_predictions(y_val, y_previsto)">ConfusionMatrixDisplay.from_predictions(y_val, y_previsto)</code>
+            <p class="explanation-box">
+                A matriz de confusão é uma ferramenta essencial para visualizar o desempenho de um algoritmo de classificação. Ela mostra o número de verdadeiros positivos, verdadeiros negativos, falsos positivos e falsos negativos. Isso permite que você entenda não apenas quantos acertos o modelo teve, mas também onde ele cometeu erros (confundindo uma classe com outra). É particularmente útil para identificar problemas como o viés em modelos que não classificam bem uma classe minoritária.
+            </p>
+        </section>
+
+        <section>
+            <h2>6. Métricas</h2>
+            <code data-text="from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score">from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score</code>
+            <code data-text="accuracy_score(y_val, y_previsto)">accuracy_score(y_val, y_previsto)</code>
+            <code data-text="precision_score(y_val, y_previsto)">precision_score(y_val, y_previsto)</code>
+            <code data-text="recall_score(y_val, y_previsto)">recall_score(y_val, y_previsto)</code>
+            <p class="explanation-box">
+                Além da acurácia, outras métricas fornecem uma visão mais granular do desempenho:
+                <ul>
+                    <li><b>Acurácia:</b> (Verdadeiros Positivos + Verdadeiros Negativos) / Total. É a proporção de previsões corretas. Pode ser enganosa em classes desbalanceadas.</li>
+                    <li><b>Precisão:</b> Verdadeiros Positivos / (Verdadeiros Positivos + Falsos Positivos). Responde: Dos que o modelo previu como positivo, quantos realmente eram positivos?</li>
+                    <li><b>Recall (Sensibilidade):</b> Verdadeiros Positivos / (Verdadeiros Positivos + Falsos Negativos). Responde: Dos que eram realmente positivos, quantos o modelo identificou corretamente?</li>
+                    <li><b>F1-Score:</b> Média harmônica de precisão e recall. É útil quando você precisa de um equilíbrio entre precisão e recall, especialmente em conjuntos de dados com classes desbalanceadas.</li>
+                </ul>
+            </p>
+        </section>
+
+        <section>
+            <h2>7. Curvas de Avaliação</h2>
+            <code data-text="from sklearn.metrics import RocCurveDisplay, PrecisionRecallDisplay">from sklearn.metrics import RocCurveDisplay, PrecisionRecallDisplay</code>
+            <code data-text="RocCurveDisplay.from_predictions(y_val, y_previsto)">RocCurveDisplay.from_predictions(y_val, y_previsto)</code>
+            <p class="explanation-box">
+                Curvas de avaliação são gráficos que ajudam a entender o desempenho do modelo em diferentes limiares de classificação:
+                <ul>
+                    <li><b>Curva ROC (Receiver Operating Characteristic):</b> Plota a Taxa de Verdadeiros Positivos (Recall) contra a Taxa de Falsos Positivos. Uma curva mais próxima do canto superior esquerdo indica um modelo melhor. A Área Sob a Curva ROC (AUC-ROC) é uma métrica comum para avaliar modelos de classificação binária.</li>
+                    <li><b>Curva Precision-Recall:</b> Plota a Precisão contra o Recall. É particularmente útil em conjuntos de dados desbalanceados, onde a classe positiva é rara. Modelos com melhor desempenho terão uma curva mais próxima do canto superior direito.</li>
+                </ul>
+            </p>
+        </section>
+
+        <section>
+            <h2>8. Balanceamento</h2>
+            <code data-text="from imblearn.over_sampling import SMOTE">from imblearn.over_sampling import SMOTE</code>
+            <code data-text="from imblearn.under_sampling import NearMiss">from imblearn.under_sampling import NearMiss</code>
+            <code data-text="SMOTE().fit_resample(x, y)">SMOTE().fit_resample(x, y)</code>
+            <p class="explanation-box">
+                Quando seu conjunto de dados tem um número significativamente diferente de exemplos em cada classe (desbalanceamento), os modelos podem tender a classificar a classe majoritária com mais precisão e ignorar a minoritária. O `imbalanced-learn` oferece técnicas para lidar com isso:
+                <ul>
+                    <li><b>SMOTE (Synthetic Minority Over-sampling Technique):</b> É uma técnica de "oversampling" que cria novos exemplos sintéticos para a classe minoritária, interpolando entre os exemplos existentes.</li>
+                    <li><b>NearMiss:</b> É uma técnica de "undersampling" que remove exemplos da classe majoritária para balancear o conjunto de dados. Existem diferentes versões (e.g., NearMiss-1, NearMiss-2) que usam diferentes heurísticas para selecionar os exemplos a serem removidos.</li>
+                </ul>
+                Essas técnicas ajudam a melhorar o desempenho do modelo na classe minoritária.
+            </p>
+        </section>
+
+        <section>
+            <h2>9. Pipeline</h2>
+            <code data-text="from imblearn.pipeline import Pipeline as imbpipeline">from imblearn.pipeline import Pipeline as imbpipeline</code>
+            <code data-text="pipeline = imbpipeline([('oversample', SMOTE()), ('modelo', modelo)])">pipeline = imbpipeline([('oversample', SMOTE()), ('modelo', modelo)])</code>
+            <p class="explanation-box">
+                Usar um `Pipeline` é uma prática recomendada no Machine Learning, especialmente quando se lida com transformações de dados (como balanceamento) e treinamento de modelos. O `imbpipeline` do `imbalanced-learn` estende o `Pipeline` do Scikit-learn para incluir etapas de balanceamento de dados. Isso garante que o balanceamento seja aplicado apenas aos dados de treinamento dentro de cada iteração de validação cruzada, prevenindo o vazamento de dados (`data leakage`) e garantindo uma avaliação justa do modelo.
+            </p>
+        </section>
+
+        <section>
+            <h2>10. Validação Cruzada</h2>
+            <code data-text="from sklearn.model_selection import StratifiedKFold, cross_val_score">from sklearn.model_selection import StratifiedKFold, cross_val_score</code>
+            <code data-text="skf = StratifiedKFold(n_splits=5, shuffle=True)">skf = StratifiedKFold(n_splits=5, shuffle=True)</code>
+            <code data-text="cross_val_score(modelo, x, y, cv=skf)">cross_val_score(modelo, x, y, cv=skf)</code>
+            <p class="explanation-box">
+                A validação cruzada é uma técnica robusta para avaliar o desempenho do modelo e garantir que ele generalize bem para dados não vistos. Em vez de uma única divisão treino/teste, o `StratifiedKFold` divide o conjunto de dados em "k" dobras (folds), mantendo a proporção de classes em cada dobra. O modelo é treinado "k" vezes, usando uma dobra diferente para teste a cada vez, e as métricas são calculadas para cada iteração. O `cross_val_score` executa esse processo e retorna as pontuações de cada fold, fornecendo uma estimativa mais confiável do desempenho real do modelo. O `shuffle=True` randomiza os dados antes da divisão.
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <p>Desenvolvido por  <a href="https://scikit-learn.org/stable/" target="_blank">Cauã Santos</a>. </br> Ultilizando <a href="https://scikit-learn.org/stable/" target="_blank">scikit-learn</a> e <a href="https://imbalanced-learn.org/stable/" target="_blank">imbalanced-learn</a>.</p>
+    </footer>
+
+    <button id="backToTopBtn" title="Voltar ao Topo">🔝</button>
+
+    <script src="/script.js"></script>
+</body>
+</html>
